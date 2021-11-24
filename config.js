@@ -7,16 +7,16 @@ const config = module.exports = { forward: { }, ssl: { } };
 config.olServer = 'http://localhost';
 
 // used if all the working directories in one place
-config.baseDir = '/home/data/';
+config.baseDir = '/home/gitbridge/';
 
 // place of the git repositories
-config.reposDir = baseDir + 'repos/';
+config.reposDir = config.baseDir + 'repos/';
 
 // place of the git clones
-config.padsDir = baseDir + 'pads/';
+config.padsDir = config.baseDir + 'pads/';
 
 // blueprint of the overleaf version (only differences to git to be uploaded again)
-config.bluesDir = baseDir + 'blues/';
+config.bluesDir = config.baseDir + 'blues/';
 
 // milliseconds to not downsync a project again
 config.downSyncTimeout = 30000;
