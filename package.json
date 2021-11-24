@@ -2,7 +2,8 @@
   "name": "olgitbridge",
   "version": "1.0.0",
   "author": "Axel Kittenberger <axkibe@gmail.com>",
-  "license": "AGPL-3.0-or-later",
+  "license": "AGPL-3.0-only",
+  "main": "./src/server.js",
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.com/axkibe/olgitbridge"
