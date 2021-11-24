@@ -1,0 +1,5 @@
+while true; do
+	echo "--------- RE/START -----------" | tee -a log;
+	( authbind node src/server.js 2>&1 || true ) | tee -a log;
+	sleep 2;
+done
