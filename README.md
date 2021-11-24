@@ -8,5 +8,24 @@ Note that contrary to the cloud version this bridge does not use realtime change
 
 ## Getting started
 
+Start installing (likely on another server than the Overleaf server)
 
+```
+git clone https://gitlab.com/axkibe/olgitbridge.git
+cd olgitbridge
+npm install
+```
 
+edit config.js in your favorite editor.
+
+If the bridge is running on port 80 and or 443 using authbind may be a good idea.
+
+Start the server with (or without authbind)
+
+```
+authbind node src/server.js
+```
+
+## Dependencies
+
+In development node.js v16.11.0 was used.
