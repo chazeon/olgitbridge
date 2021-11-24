@@ -2,6 +2,7 @@
   "name": "olgitbridge",
   "version": "1.0.0",
   "author": "Axel Kittenberger <axkibe@gmail.com>",
+  "description": "another overleaf git bridge",
   "license": "AGPL-3.0-only",
   "main": "./src/server.js",
   "repository": {
