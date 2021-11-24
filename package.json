@@ -1,0 +1,25 @@
+{
+  "name": "olgitbridge",
+  "version": "1.0.0",
+  "author": "Axel Kittenberger <axkibe@gmail.com>",
+  "license": "	AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/axkibe/olgitbridge"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/axkibe/olgitbridge/issues"
+  },
+  "homepage": "https://gitlab.com/axkibe/olgitbridge#readme",
+  "dependencies": {
+    "active-x-obfuscator": "^0.0.2",
+    "axios": "^0.24.0",
+    "axios-cookiejar-support": "^2.0.3",
+    "form-data": "^4.0.0",
+    "git-http-backend": "^1.0.2",
+    "tough-cookie": "^4.0.0",
+    "uglify-js": "^3.14.3",
+    "unzipper": "^0.10.11",
+    "ws": "^8.2.3"
+  }
+}

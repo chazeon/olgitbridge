@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ ! -f .eslint.stamp ]; then
+	touch -d 19700101 .eslint.stamp
+fi
+FILES=`find src -name \*.js -newer .eslint.stamp`
+if [ -z "${FILES}" ]; then exit 0; fi
+( eslint ${FILES} && touch .eslint.stamp ) | head -n 20
+exit ${PIPESTATUS[0]}
