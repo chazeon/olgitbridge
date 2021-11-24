@@ -26,6 +26,8 @@ Start the server with (or without authbind)
 authbind node src/server.js
 ```
 
+Wrap it in your auto(re)starter/service of your choice.
+
 ## Dependencies
 
 In development node.js v16.11.0 was used.
