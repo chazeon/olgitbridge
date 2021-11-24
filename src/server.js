@@ -260,7 +260,7 @@ const start =
 	console.log( '[*] listening on port', config.port );
 
 	// forwards http requests to https
-	if( config.forward )
+	if( config.forward.enable )
 	{
 		http.createServer( ( req, res ) =>
 		{

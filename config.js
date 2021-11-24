@@ -8,7 +8,7 @@ config.olServer = 'http://localhost';
 
 // used if all the working directories in one place
 // must be ending with '/'
-config.baseDir = '/home/gitbridge/';
+config.baseDir = '/home/axel/olgb/';
 
 // place of the git repositories
 config.reposDir = config.baseDir + 'repos/';
@@ -28,7 +28,7 @@ config.ssl.key = 'XXX';
 config.ssl.cert = 'XXX';
 
 // change to 443 for https
-config.port = 80;
+config.port = 5000;
 
 // enable to forward requests to the main port.
 config.forward.enable = false;
