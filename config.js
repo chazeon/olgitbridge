@@ -7,6 +7,7 @@ const config = module.exports = { forward: { }, ssl: { } };
 config.olServer = 'http://localhost';
 
 // used if all the working directories in one place
+// must be ending with '/'
 config.baseDir = '/home/gitbridge/';
 
 // place of the git repositories
