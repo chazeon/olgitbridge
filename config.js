@@ -8,7 +8,7 @@ config.olServer = 'http://localhost';
 
 // used if all the working directories in one place
 // must be ending with '/'
-config.baseDir = '/home/axel/olgb/';
+config.baseDir = '/var/olgitbridge/';
 
 // place of the git repositories
 config.reposDir = config.baseDir + 'repos/';
