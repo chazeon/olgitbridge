@@ -2,7 +2,6 @@
 | Main file starting the server process of olgitbridge.
 */
 //process.env.DEBUG = '*';
-
 const config = require( '../config' );
 const backend = require( 'git-http-backend' );
 const downsync = require( './downsync' );
@@ -57,7 +56,7 @@ const beginRemoteGitRequest =
 	// spawns the git request
 	const ps = spawn( service.cmd, args );
 	ps.stdout.pipe( service.createStream( ) ).pipe( ps.stdin );
-	ps.on( 'close', ( ) => endRemoteGitRequest( client, project, auth, pflag ) );
+	ps.on( 'close', ( ) => endRemoteGitRequest( client, project, cmd, auth, pflag ) );
 };
 
 /*
@@ -66,12 +65,15 @@ const beginRemoteGitRequest =
 | while olgitbridge still handles upsyncing the changes to overleaf.
 */
 const endRemoteGitRequest =
-	async function( client, project, auth, pflag )
+	async function( client, project, cmd, auth, pflag )
 {
 	console.log( client.count, 'remote git request ended, pulling into pad' );
 	await git.pull( project.padDir );
-	console.log( client.count, 'upsyncing' );
-	await upsync( client, olServer, project );
+	if( cmd === 'git-receive-pack' )
+	{
+		console.log( client.count, 'upsyncing' );
+		await upsync( client, olServer, project );
+	}
 	console.log( client.count, 'overleaf logout' );
 	await olops.logout( client, olServer );
 	console.log( client.count, 'releasing project semaphore' );
