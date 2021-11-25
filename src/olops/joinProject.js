@@ -19,19 +19,26 @@ module.exports =
 				'force new connection': true,
 			}
 		);
-	// FIXME handle issues a bit better
-	socket.on( 'error', ( err ) => console.log( client.count, 'socketio error', err ) );
-	socket.on( 'connect_error', ( ) => console.log( client.count, 'socketio connect error' ) );
-	// waits for connection
-	await new Promise( (resolve, reject) => socket.once( 'connect', ( ) => resolve() ) );
-	const project =
-		await new Promise( ( resolve, reject ) =>
+	let project;
+
+	// this is a bad workaround, sometimes socket.io just doesn't seem to reply
+	// (or reply to a previous connection, there are some fixes in newer versions it seems)
+	// after a timeout just try again. Promise logic should discard the respective other event
+	// should it occour.
+	while( !project )
+	{
+		const promise = new Promise( ( resolve, reject ) => {
 			socket.emit(
 				'joinProject',
 				{ 'project_id': project_id },
 				( self, res, owner, number ) => resolve( res )
-			)
-		);
+			);
+			setTimeout( ( ) => resolve( undefined ), 1000 );
+		} );
+		project = await promise;
+		if( !project ) console.log( client.count, '*** timeout on socket.io, retrying' );
+	}
+	console.log( client.count, 'iosocket disconnect' );
 	socket.disconnect( );
 	return project;
 };
