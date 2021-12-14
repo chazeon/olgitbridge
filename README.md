@@ -28,6 +28,10 @@ authbind node src/server.js
 
 Wrap it in your auto(re)starter/service of your choice.
 
+## Docker container
+
+There is a docker container provided here, feel free to use it for your deployment. Make sure to edit the config before launching the service. It might make sense to mount the `/var/olgitbridge/data` folder, so the content persists a software update.
+
 ## Dependencies
 
 In development node.js v16.11.0 was used.
