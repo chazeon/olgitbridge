@@ -88,7 +88,7 @@ const upSyncDir =
 					subs: { },
 				};
 			}
-			await upSyncDir( client, olServer, project, name + '/', leaf );
+			await upSyncDir( client, olServer, project, relDir + '/' + name + '/', leaf );
 		}
 		else
 		{
