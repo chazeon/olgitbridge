@@ -61,6 +61,7 @@ const beginRemoteGitRequest =
 
 /*
 | Called after the git request has been server.
+|
 | Note that unless client sends in a second command it is returned already
 | while olgitbridge still handles upsyncing the changes to overleaf.
 */
@@ -199,7 +200,14 @@ const serve =
 {
 	const count = '[' + (++counter) + ']';
 	const url = req.url;
-	const project_id = url.split( '/' )[ 1 ];
+	let project_id = url.split( '/' )[ 1 ];
+
+	// cuts away the .git if given
+	if( project_id.endsWith( '.git' ) )
+	{
+		project_id = project_id.substr( 0, project_id.length - 4 );
+	}
+
 	console.log( count, 'getting request for', project_id );
 
 	const client = olops.client( );
