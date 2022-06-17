@@ -18,6 +18,7 @@ const zlib = require ('zlib' );
 
 const bluesDir = config.bluesDir;
 const downSyncTimeout = config.downSyncTimeout;
+const hashDir = config.hashDir;
 const olServer = config.olServer;
 const padsDir = config.padsDir;
 const reposDir = config.reposDir;
@@ -148,6 +149,8 @@ const prepareProject =
 			blueDir: bluesDir + project_id + '/',
 			id: project_id,
 			lastSync: undefined,
+			// stores the hash of the last downloaded zip
+			hashFilename: hashDir + project_id,
 			padDir: padsDir + project_id + '/',
 			repoDir: reposDir + project_id + '/',
 			semaphore: new Semaphore( ),
@@ -223,18 +226,24 @@ const serve =
 		if( !lastSync || now - lastSync >= downSyncTimeout )
 		{
 			project.lastSync = now;
-			await downsync( client, olServer, project );
-			await git.save( count, project.padDir, 'synced by olgitbridge' );
+			if( await downsync( client, olServer, project ) )
+			{
+				// downsync returns true if it wasnt cached
+				await git.save( count, project.padDir, 'synced by olgitbridge' );
+			}
 		}
 		else
 		{
+			// FIXME in case of git-receive-pack it should *ALWAYS* sync before.
 			console.log( count, 'skipping downsync as last was ', (now - lastSync) / 1000 ,'s ago' );
 		}
 	}
 
 	// potentially unzips body stream
 	if( req.headers[ 'content-encoding' ] === 'gzip' )
+	{
 		req = req.pipe( zlib.createGunzip( ) );
+	}
 
 	req.pipe(
 		backend( url, ( err, service ) =>

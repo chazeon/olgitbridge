@@ -35,16 +35,46 @@ module.exports =
 	const padDir = project.padDir;
 	const blueDir = project.blueDir;
 
+	console.log( client.count, 'overleaf downloading zip' );
+	const zipFile = await olops.downloadZip( client, olServer, project.id );
+	const directory = await unzipper.Open.buffer( zipFile );
+
+	// creates a hash of the zip
+	// ( cannot create a hash of the whole buffer, since its always different
+	//   due to creation timestamps )
+
+	let hash = '';
+	for( let file of directory.files )
+	{
+		hash +=
+			file.path
+			+ ':' + file.uncompressedSize
+			+ ':' + file.crc32
+			+ '\n';
+	}
+	try
+	{
+		const oldHash = ( await fs.readFile( project.hashFilename ) ) + '';
+		if( oldHash === hash )
+		{
+			console.log( client.count, 'hash identical, skipping download/sync' );
+			return false;
+		}
+	}
+	catch( e )
+	{
+		// ignore, assume no cache
+	}
+
 	console.log( client.count, 'emptying pad & blue' );
 	await emptyDir( padDir, true );
 	await emptyDir( blueDir, false );
 
-	console.log( client.count, 'overleaf downloading zip' );
-	const zipFile = await olops.downloadZip( client, olServer, project.id );
-
 	console.log( client.count, 'unzipping to pad' );
-	const directory = await unzipper.Open.buffer( zipFile );
 	await directory.extract( { path: padDir } );
 	console.log( client.count, 'unzipping to blue' );
 	await directory.extract( { path: blueDir } );
+
+	await fs.writeFile( project.hashFilename, hash );
+	return true;
 };

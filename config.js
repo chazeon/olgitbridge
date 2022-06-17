@@ -10,14 +10,18 @@ config.olServer = 'http://localhost';
 // must be ending with '/'
 config.baseDir = '/var/olgitbridge/';
 
-// place of the git repositories
-config.reposDir = config.baseDir + 'repos/';
+// blueprint of the overleaf version (only differences to git to be uploaded again)
+config.bluesDir = config.baseDir + 'blues/';
+
+// stores hashes of the downloaded zips to optimize cases
+// when no changes happened in overleaf
+config.hashDir = config.baseDir + 'hash/';
 
 // place of the git clones
 config.padsDir = config.baseDir + 'pads/';
 
-// blueprint of the overleaf version (only differences to git to be uploaded again)
-config.bluesDir = config.baseDir + 'blues/';
+// place of the git repositories
+config.reposDir = config.baseDir + 'repos/';
 
 // milliseconds to not downsync a project again
 config.downSyncTimeout = 30000;
