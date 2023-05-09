@@ -7,7 +7,7 @@ const config = module.exports = { forward: { }, ssl: { } };
 config.olServer = 'http://localhost';
 
 // used if all the working directories in one place
-// must be ending with '/'
+// must be absolute path ending with '/'
 config.baseDir = '/var/olgitbridge/';
 
 // blueprint of the overleaf version (only differences to git to be uploaded again)
