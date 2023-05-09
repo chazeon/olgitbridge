@@ -256,7 +256,7 @@ const start =
 	async function( )
 {
 	// creates the working dirs, ignores already exisiting errors
-	for( let dir of [ reposDir, padsDir, bluesDir ] )
+	for( let dir of [ reposDir, padsDir, bluesDir, hashDir ] )
 	{
 		try{ await fs.mkdir( dir ); }
 		catch( e ) { if( e.code !== 'EEXIST' ) throw e; }
