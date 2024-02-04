@@ -8,6 +8,7 @@ module.exports =
 {
 	const formData = new FormData();
 	formData.append( 'qqfile', data, filename );
+	formData.append( 'name', filename );
 	try
 	{
 		await client.post(
