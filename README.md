@@ -11,7 +11,7 @@ Note that contrary to the cloud version this bridge does not use realtime change
 Start installing (likely on another server than the Overleaf server)
 
 ```
-git clone https://gitlab.com/axkibe/olgitbridge.git
+git clone https://gitlab.com/chazeon/olgitbridge.git
 cd olgitbridge
 npm install
 ```
